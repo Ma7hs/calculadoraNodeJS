@@ -15,10 +15,10 @@ function(calculadora){
         //Tratamos um ERRO que caso usuário não digite uma operação que corresponda a Adição || Subtração || Multiplicação || Divisão
         if(operacaoCalculadora == 1 || operacaoCalculadora == 2 || operacaoCalculadora == 3 || operacaoCalculadora ==4){
             inputData.question("Digite o primeiro número: ", function(valor1){
-                let primeiroNumero = valor1;
+                let primeiroNumero = parseFloat(valor1.replace(',','.'));
                 
                     inputData.question("Digite o segundo número: ", function(valor2){
-                        let segundoNumero = valor2;
+                        let segundoNumero = parseFloat(valor2.replace(',','.'));
     
                         //Tratamos um ERRO caso o usuário digite um NaN ou digite algo vazio!
                         if(isNaN(primeiroNumero) || isNaN(segundoNumero) || primeiroNumero == "" || segundoNumero == ""){
