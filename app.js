@@ -1,3 +1,13 @@
+/********************************************************
+
+
+Objetivo - Realizar cálculos matemáticos atavés do NodeJS
+Data- 30/01/2023
+Autor - Matheus Siqueira Silva
+Versão - 1.0
+
+*********************************************************/
+
 var readline = require('readline');
 var inputData = readline.createInterface({
     input: process.stdin,
@@ -15,14 +25,15 @@ function(calculadora){
         //Tratamos um ERRO que caso usuário não digite uma operação que corresponda a Adição || Subtração || Multiplicação || Divisão
         if(operacaoCalculadora == 1 || operacaoCalculadora == 2 || operacaoCalculadora == 3 || operacaoCalculadora ==4){
             inputData.question("Digite o primeiro número: ", function(valor1){
-                let primeiroNumero = parseFloat(valor1.replace(',','.'));
+                let primeiroNumero = valor1.replace(',','.');
                 
                     inputData.question("Digite o segundo número: ", function(valor2){
-                        let segundoNumero = parseFloat(valor2.replace(',','.'));
+                        let segundoNumero = valor2.replace(',','.')
     
                         //Tratamos um ERRO caso o usuário digite um NaN ou digite algo vazio!
                         if(isNaN(primeiroNumero) || isNaN(segundoNumero) || primeiroNumero == "" || segundoNumero == ""){
                             console.log("ERROR: Número inserido incorretamente!")
+                            inputData.close();  
                         }else{
                             if(operacaoCalculadora == 1){
                                 soma = Number.parseFloat(primeiroNumero) + Number.parseFloat(segundoNumero);
@@ -34,13 +45,19 @@ function(calculadora){
                                 multiplicacao = Number.parseFloat(primeiroNumero) * Number.parseFloat(segundoNumero);
                                 console.log("O resultado da operação da Multiplicação é: " + multiplicacao);
                             }else{
-                                divisao = Number.parseFloat(primeiroNumero) / Number.parseFloat(segundoNumero);
-                                console.log("O resultado da operação da Divisão: " + divisao);
+                                if(segundoNumero != Number(0)){
+                                    divisao = Number.parseFloat(primeiroNumero) / Number.parseFloat(segundoNumero);
+                                    console.log("O resultado da operação da Divisão: " + divisao);
+                                }else{
+                                    console.log("ERROR: Não é possível fazer uma divisão por 0");
+                                }
                             }
                         }
+                        inputData.close();
                     })
             })
         }else{
-            console.log("ERROR: Insira uma opção válida de operação!")
+            console.log("ERROR: Insira uma opção válida de operação!");
+            inputData.close();
         }
 })
